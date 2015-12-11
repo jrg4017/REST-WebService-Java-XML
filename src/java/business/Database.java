@@ -141,7 +141,7 @@ public class Database{
             }
         }
         //add 10 to the id and return it to get the next id
-        highestId += 10;
+        highestId += 1;
         return String.valueOf(highestId);
     }//end getLastAppointmentId
 

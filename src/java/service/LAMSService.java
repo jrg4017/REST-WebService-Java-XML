@@ -8,7 +8,7 @@ import business.*;
 import javax.ws.rs.core.*;
 import javax.ws.rs.*;
 
-@Path("/LAMSService")
+@Path("/Services")
 public class LAMSService{
    protected  Database database = null;
    /**
@@ -65,7 +65,8 @@ public class LAMSService{
     @GET
     @Consumes("text/plain")
     @Produces("application/xml")
-    public String getAppointment(String appointment){
+    public String getAppointment(@PathParam("appointment") String appointment){
+        //initialize if for some reason null
         if(database == null) this.database = new Database();
         List<Object> obj = this.database.getAppointment(appointment);
         Object rtn = null;
@@ -93,7 +94,7 @@ public class LAMSService{
     @PUT
     @Consumes({"text/xml","application/xml"})
     @Produces("application/xml")
-    public String addAppointment(@QueryParam("xmlStyle") String xmlStyle){
+    public String addAppointment(@DefaultValue("1") @QueryParam("xmlStyle") String xmlStyle){
         try {
             //parse the XML document and grab necessary information
             ParseXML parseXML = new ParseXML(xmlStyle);
